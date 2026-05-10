@@ -50,12 +50,12 @@ export function VsFreelancer() {
 
         <div className="mt-8 border border-line bg-paper">
           <div className="grid grid-cols-12 px-6 py-4 border-b border-line label-eyebrow">
-            <span className="col-span-6 md:col-span-7">What you get</span>
+            <span className="col-span-6 md:col-span-8">What you get</span>
             {(view === "both" || view === "soubh") && (
-              <span className="col-span-3 md:col-span-2.5 text-center text-terracotta">Sprint</span>
+              <span className="col-span-3 md:col-span-2 text-center text-terracotta">Sprint</span>
             )}
             {(view === "both" || view === "freelancer") && (
-              <span className="col-span-3 md:col-span-2.5 text-center">Freelancer</span>
+              <span className="col-span-3 md:col-span-2 text-center">Freelancer</span>
             )}
           </div>
           {rows.map((r, i) => (
@@ -63,9 +63,9 @@ export function VsFreelancer() {
               key={i}
               className="grid grid-cols-12 items-center px-6 py-5 border-b border-line last:border-0 hover:bg-highlight/30 transition-colors"
             >
-              <span className="col-span-6 md:col-span-7 text-ink">{r.feature}</span>
+              <span className="col-span-6 md:col-span-8 text-ink">{r.feature}</span>
               {(view === "both" || view === "soubh") && (
-                <span className="col-span-3 md:col-span-2.5 flex justify-center">
+                <span className="col-span-3 md:col-span-2 flex justify-center">
                   {r.soubh ? (
                     <span className="w-7 h-7 bg-terracotta text-paper flex items-center justify-center">
                       <Check className="w-4 h-4" strokeWidth={3} />
@@ -76,7 +76,7 @@ export function VsFreelancer() {
                 </span>
               )}
               {(view === "both" || view === "freelancer") && (
-                <span className="col-span-3 md:col-span-2.5 flex justify-center">
+                <span className="col-span-3 md:col-span-2 flex justify-center">
                   {r.freelancer ? (
                     <span className="w-7 h-7 border border-ink text-ink flex items-center justify-center">
                       <Check className="w-4 h-4" strokeWidth={2.5} />
