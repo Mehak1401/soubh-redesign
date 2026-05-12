@@ -12,6 +12,8 @@ import { Pricing } from "@/components/landing/Pricing";
 import { Testimonials } from "@/components/landing/Testimonials";
 import { FAQ } from "@/components/landing/FAQ";
 import { StickyCTA, Footer } from "@/components/landing/StickyCTA";
+import { ReadingProgress } from "@/components/landing/ReadingProgress";
+import { ExitIntent } from "@/components/landing/ExitIntent";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -37,6 +39,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <main className="bg-paper text-ink">
+      <ReadingProgress />
       <Nav />
       <Hero />
       <TrustBar />

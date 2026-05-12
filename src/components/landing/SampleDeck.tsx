@@ -1,5 +1,6 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { useEffect, useState } from "react";
+import { BeforeAfter } from "./BeforeAfter";
 
 const slides = [
   { n: "01", title: "Why we exist", body: "The single sentence that vendors remember three weeks after the appraisal." },
@@ -23,6 +24,8 @@ export function SampleDeck() {
   return (
     <section className="py-24 md:py-32 px-6 lg:px-10 bg-ink text-paper">
       <div className="max-w-[1280px] mx-auto">
+        <BeforeAfter />
+
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
             <p className="label-eyebrow text-paper/60 mb-6">Deliverable 02 · Preview</p>
