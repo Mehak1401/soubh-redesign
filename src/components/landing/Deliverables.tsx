@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
-import { ArrowUpRight } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { ArrowUpRight, ClipboardList, Presentation, Calendar } from "lucide-react";
 
 type Deliverable = {
   n: string;
@@ -50,8 +52,10 @@ const deliverables: Deliverable[] = [
 
 export function Deliverables() {
   const [open, setOpen] = useState<Deliverable | null>(null);
+  const icons = [ClipboardList, Presentation, Calendar];
 
   return (
+    <TooltipProvider delayDuration={150}>
     <section id="sprint" className="py-24 md:py-32 px-6 lg:px-10 bg-paper border-t border-line">
       <div className="max-w-[1280px] mx-auto">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
