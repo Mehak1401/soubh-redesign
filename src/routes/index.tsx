@@ -54,6 +54,7 @@ function Index() {
       <FAQ />
       <StickyCTA />
       <Footer />
+      <ExitIntent />
     </main>
   );
 }
