@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { Quote } from "lucide-react";
 
 type T = { quote: string; longer: string; name: string; role: string; agency: string; initials: string };
 
@@ -45,12 +47,18 @@ export function Testimonials() {
         </h2>
 
         <div className="mt-14 grid md:grid-cols-3 gap-6">
-          {testimonials.map((t) => (
-            <button
+          {testimonials.map((t, i) => (
+            <motion.button
               key={t.name}
               onClick={() => setOpen(t)}
-              className="text-left bg-paper border border-line border-l-4 border-l-highlight p-8 transition-all hover:border-ink hover:border-l-terracotta hover:-translate-y-0.5"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.55, delay: i * 0.12, ease: [0.2, 0.8, 0.2, 1] }}
+              whileHover={{ y: -4 }}
+              className="text-left bg-paper border border-line border-l-4 border-l-highlight p-8 transition-colors hover:border-ink hover:border-l-terracotta relative"
             >
+              <Quote className="absolute top-6 right-6 w-5 h-5 text-line group-hover:text-terracotta" strokeWidth={1.5} />
               <p className="font-serif italic text-ink/90 text-lg leading-relaxed">
                 &ldquo;{t.quote}&rdquo;
               </p>
@@ -66,7 +74,7 @@ export function Testimonials() {
               <span className="block text-xs text-concrete mt-4 underline-draw w-fit">
                 Read the full story →
               </span>
-            </button>
+            </motion.button>
           ))}
         </div>
       </div>
