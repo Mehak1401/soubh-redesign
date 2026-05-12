@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Check } from "lucide-react";
+import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 
@@ -54,9 +54,15 @@ export function Problem() {
 
         <div className="mt-14 grid md:grid-cols-2 gap-px bg-line border border-line">
           {items.map((text, i) => (
-            <button
+            <motion.button
               key={i}
               onClick={() => toggle(i)}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ delay: i * 0.06, duration: 0.45 }}
+              whileHover={{ scale: 1.005 }}
+              whileTap={{ scale: 0.995 }}
               className={`group text-left p-6 md:p-8 transition-colors ${
                 checked[i] ? "bg-highlight" : "bg-paper hover:bg-paper/60"
               }`}
@@ -83,7 +89,7 @@ export function Problem() {
                 </span>
                 <span className="text-ink leading-relaxed">{text}</span>
               </div>
-            </button>
+            </motion.button>
           ))}
         </div>
 
