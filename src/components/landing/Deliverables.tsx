@@ -76,6 +76,7 @@ export function Deliverables() {
           <div className="space-y-6">
             {deliverables.map((d, i) => {
               const phaseChange = i === 0 || d.phase !== deliverables[i - 1].phase;
+              const Icon = icons[i] ?? ClipboardList;
               return (
                 <div key={d.n}>
                   {phaseChange && (
@@ -86,16 +87,31 @@ export function Deliverables() {
                       <span className="flex-1 h-px bg-line" />
                     </div>
                   )}
-                  <button
+                  <motion.button
                     onClick={() => setOpen(d)}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-80px" }}
+                    transition={{ duration: 0.55, delay: i * 0.1, ease: [0.2, 0.8, 0.2, 1] }}
+                    whileHover={{ x: 4 }}
                     className="group relative w-full text-left flex gap-6 md:gap-10 pl-0"
                   >
-                    <span className="relative z-10 shrink-0 w-9 h-9 md:w-12 md:h-12 bg-paper border border-ink text-ink font-semibold flex items-center justify-center text-sm md:text-base">
-                      {d.n}
-                    </span>
-                    <div className="flex-1 border border-line bg-paper p-6 md:p-10 transition-all duration-300 group-hover:border-ink group-hover:-translate-y-0.5">
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <span className="relative z-10 shrink-0 w-9 h-9 md:w-12 md:h-12 bg-paper border border-ink text-ink font-semibold flex items-center justify-center text-sm md:text-base group-hover:bg-ink group-hover:text-paper transition-colors">
+                          {d.n}
+                        </span>
+                      </TooltipTrigger>
+                      <TooltipContent className="bg-ink text-paper rounded-none border-0">
+                        Click for the full breakdown
+                      </TooltipContent>
+                    </Tooltip>
+                    <div className="flex-1 border border-line bg-paper p-6 md:p-10 transition-all duration-300 group-hover:border-ink group-hover:shadow-[0_20px_40px_-30px_rgba(0,0,0,0.3)]">
                       <div className="flex items-center justify-between gap-4 mb-3">
-                        <span className="label-eyebrow">{d.week} · Deliverable {d.n}</span>
+                        <span className="label-eyebrow inline-flex items-center gap-2">
+                          <Icon className="w-3.5 h-3.5 text-terracotta" strokeWidth={1.75} />
+                          {d.week} · Deliverable {d.n}
+                        </span>
                         <ArrowUpRight className="w-5 h-5 text-concrete group-hover:text-terracotta group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                       </div>
                       <h3 className="font-semibold text-ink text-2xl md:text-[28px] tracking-tight leading-tight mb-3">
@@ -106,16 +122,20 @@ export function Deliverables() {
                       </p>
                       <div className="mt-6 flex flex-wrap gap-2">
                         {d.meta.map((m) => (
-                          <span
-                            key={m}
-                            className="text-xs px-2.5 py-1 border border-line text-concrete bg-paper"
-                          >
-                            {m}
-                          </span>
+                          <Tooltip key={m}>
+                            <TooltipTrigger asChild>
+                              <span className="text-xs px-2.5 py-1 border border-line text-concrete bg-paper hover:border-ink hover:text-ink transition-colors cursor-help">
+                                {m}
+                              </span>
+                            </TooltipTrigger>
+                            <TooltipContent className="bg-ink text-paper rounded-none border-0">
+                              {m} option included
+                            </TooltipContent>
+                          </Tooltip>
                         ))}
                       </div>
                     </div>
-                  </button>
+                  </motion.button>
                 </div>
               );
             })}
@@ -155,5 +175,6 @@ export function Deliverables() {
         </SheetContent>
       </Sheet>
     </section>
+    </TooltipProvider>
   );
 }
