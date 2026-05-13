@@ -3,6 +3,9 @@ import { motion } from "framer-motion";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { ArrowUpRight, ClipboardList, Presentation, Calendar } from "lucide-react";
+import positioningImg from "@/assets/deliverable-positioning.png";
+import deckImg from "@/assets/deliverable-deck.png";
+import calendarImg from "@/assets/deliverable-calendar.png";
 
 type Deliverable = {
   n: string;
@@ -12,6 +15,8 @@ type Deliverable = {
   body: string;
   meta: string[];
   detail: string;
+  image: string;
+  imageAlt: string;
 };
 
 const deliverables: Deliverable[] = [
@@ -25,6 +30,8 @@ const deliverables: Deliverable[] = [
     meta: ["Safe", "Stretch", "Bold"],
     detail:
       "You walk out with a Safe option (defensible, low-risk), a Stretch option (rewards conviction), and a Bold option (changes the market conversation). Each is mapped to vendor psychology, your team's natural strengths, and the realistic content you can sustain. We pick one together in workshop two.",
+    image: positioningImg,
+    imageAlt: "Three stacked positioning option cards with thesis and risk breakdown",
   },
   {
     n: "02",
@@ -36,6 +43,8 @@ const deliverables: Deliverable[] = [
     meta: ["Appraisals", "Onboarding", "Alignment"],
     detail:
       "Six slides. Not sixty. Why you exist, who you exist for, what you sell that no one else does, the proof, the process, and the ask. Editable source files (Figma + Keynote) handed over. Your team can change a logo without breaking the system.",
+    image: deckImg,
+    imageAlt: "Internal positioning deck slide previewing the one-sentence definition",
   },
   {
     n: "03",
@@ -47,6 +56,8 @@ const deliverables: Deliverable[] = [
     meta: ["90 days", "3 posts/week", "Scheduled by us"],
     detail:
       "We write it in your voice (captured in workshop one). We schedule it. You approve it weekly via Slack. Monthly review call to look at what's landing and adjust the next month's themes. You own every file at the end.",
+    image: calendarImg,
+    imageAlt: "12-week content calendar mapped across Instagram, LinkedIn and long-form",
   },
 ];
 
