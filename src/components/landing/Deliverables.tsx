@@ -3,6 +3,9 @@ import { motion } from "framer-motion";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { ArrowUpRight, ClipboardList, Presentation, Calendar } from "lucide-react";
+import positioningImg from "@/assets/deliverable-positioning.png";
+import deckImg from "@/assets/deliverable-deck.png";
+import calendarImg from "@/assets/deliverable-calendar.png";
 
 type Deliverable = {
   n: string;
@@ -12,6 +15,8 @@ type Deliverable = {
   body: string;
   meta: string[];
   detail: string;
+  image: string;
+  imageAlt: string;
 };
 
 const deliverables: Deliverable[] = [
@@ -25,6 +30,8 @@ const deliverables: Deliverable[] = [
     meta: ["Safe", "Stretch", "Bold"],
     detail:
       "You walk out with a Safe option (defensible, low-risk), a Stretch option (rewards conviction), and a Bold option (changes the market conversation). Each is mapped to vendor psychology, your team's natural strengths, and the realistic content you can sustain. We pick one together in workshop two.",
+    image: positioningImg,
+    imageAlt: "Three stacked positioning option cards with thesis and risk breakdown",
   },
   {
     n: "02",
@@ -36,6 +43,8 @@ const deliverables: Deliverable[] = [
     meta: ["Appraisals", "Onboarding", "Alignment"],
     detail:
       "Six slides. Not sixty. Why you exist, who you exist for, what you sell that no one else does, the proof, the process, and the ask. Editable source files (Figma + Keynote) handed over. Your team can change a logo without breaking the system.",
+    image: deckImg,
+    imageAlt: "Internal positioning deck slide previewing the one-sentence definition",
   },
   {
     n: "03",
@@ -47,6 +56,8 @@ const deliverables: Deliverable[] = [
     meta: ["90 days", "3 posts/week", "Scheduled by us"],
     detail:
       "We write it in your voice (captured in workshop one). We schedule it. You approve it weekly via Slack. Monthly review call to look at what's landing and adjust the next month's themes. You own every file at the end.",
+    image: calendarImg,
+    imageAlt: "12-week content calendar mapped across Instagram, LinkedIn and long-form",
   },
 ];
 
@@ -106,7 +117,7 @@ export function Deliverables() {
                         Click for the full breakdown
                       </TooltipContent>
                     </Tooltip>
-                    <div className="flex-1 border border-line bg-paper p-6 md:p-10 transition-all duration-300 group-hover:border-ink group-hover:shadow-[0_20px_40px_-30px_rgba(0,0,0,0.3)]">
+                    <div className="flex-1 border border-line bg-paper p-6 md:p-8 transition-all duration-300 group-hover:border-ink group-hover:shadow-[0_20px_40px_-30px_rgba(0,0,0,0.3)]">
                       <div className="flex items-center justify-between gap-4 mb-3">
                         <span className="label-eyebrow inline-flex items-center gap-2">
                           <Icon className="w-3.5 h-3.5 text-terracotta" strokeWidth={1.75} />
@@ -114,25 +125,40 @@ export function Deliverables() {
                         </span>
                         <ArrowUpRight className="w-5 h-5 text-concrete group-hover:text-terracotta group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                       </div>
-                      <h3 className="font-semibold text-ink text-2xl md:text-[28px] tracking-tight leading-tight mb-3">
-                        {d.title}
-                      </h3>
-                      <p className="font-serif text-ink/80 text-base md:text-lg leading-relaxed editorial">
-                        {d.body}
-                      </p>
-                      <div className="mt-6 flex flex-wrap gap-2">
-                        {d.meta.map((m) => (
-                          <Tooltip key={m}>
-                            <TooltipTrigger asChild>
-                              <span className="text-xs px-2.5 py-1 border border-line text-concrete bg-paper hover:border-ink hover:text-ink transition-colors cursor-help">
-                                {m}
-                              </span>
-                            </TooltipTrigger>
-                            <TooltipContent className="bg-ink text-paper rounded-none border-0">
-                              {m} option included
-                            </TooltipContent>
-                          </Tooltip>
-                        ))}
+                      <div className="grid md:grid-cols-[1fr_minmax(0,260px)] gap-6 md:gap-8 items-start">
+                        <div>
+                          <h3 className="font-semibold text-ink text-2xl md:text-[28px] tracking-tight leading-tight mb-3">
+                            {d.title}
+                          </h3>
+                          <p className="font-serif text-ink/80 text-base md:text-lg leading-relaxed editorial">
+                            {d.body}
+                          </p>
+                          <div className="mt-6 flex flex-wrap gap-2">
+                            {d.meta.map((m) => (
+                              <Tooltip key={m}>
+                                <TooltipTrigger asChild>
+                                  <span className="text-xs px-2.5 py-1 border border-line text-concrete bg-paper hover:border-ink hover:text-ink transition-colors cursor-help">
+                                    {m}
+                                  </span>
+                                </TooltipTrigger>
+                                <TooltipContent className="bg-ink text-paper rounded-none border-0">
+                                  {m} option included
+                                </TooltipContent>
+                              </Tooltip>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="relative bg-[#EFECE6] border border-line overflow-hidden aspect-[4/3] md:aspect-[5/4] order-first md:order-last">
+                          <img
+                            src={d.image}
+                            alt={d.imageAlt}
+                            loading="lazy"
+                            className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
+                          />
+                          <span className="absolute top-2 left-2 bg-ink/90 text-paper px-2 py-0.5 text-[10px] tracking-widest uppercase">
+                            Preview
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </motion.button>
@@ -150,7 +176,7 @@ export function Deliverables() {
         >
           {open && (
             <>
-              <SheetHeader className="text-left space-y-3 mb-8">
+              <SheetHeader className="text-left space-y-3 mb-6">
                 <span className="label-eyebrow">{open.week} · Deliverable {open.n}</span>
                 <SheetTitle className="text-3xl font-bold tracking-tight leading-tight">
                   {open.title}
@@ -159,6 +185,9 @@ export function Deliverables() {
                   {open.body}
                 </SheetDescription>
               </SheetHeader>
+              <div className="relative bg-[#EFECE6] border border-line overflow-hidden aspect-[4/3] mb-8">
+                <img src={open.image} alt={open.imageAlt} className="absolute inset-0 w-full h-full object-cover object-top" />
+              </div>
               <div className="border-t border-line pt-6">
                 <p className="label-eyebrow mb-3">What you actually get</p>
                 <p className="text-ink leading-relaxed">{open.detail}</p>
